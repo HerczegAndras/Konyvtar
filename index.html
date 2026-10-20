@@ -4,144 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Könyvtár Kezelő</title>
+    <title>Könyvtár Kezelő - Windows 98 Edition</title>
+    <style>
+        /* Win98 3D stílusok */
+        body {
+            background-color: #008080; /* Klasszikus Windows teal háttér */
+            font-family: "MS Sans Serif", Arial, sans-serif;
+        }
+        .win98-window {
+            background-color: #c0c0c0;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #808080;
+            border-bottom: 2px solid #808080;
+            box-shadow: 2px 2px 0px #000000;
+        }
+        .win98-titlebar {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: white;
+            font-weight: bold;
+            padding: 4px 8px;
+        }
+        .win98-button {
+            background-color: #c0c0c0;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #808080;
+            border-bottom: 2px solid #808080;
+            box-shadow: inset 1px 1px 0px #dfdfdf, inset -1px -1px 0px #808080;
+            padding: 4px 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .win98-button:active {
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            box-shadow: none;
+            padding: 5px 11px 3px 13px;
+        }
+        .win98-input, .win98-select {
+            background-color: #ffffff;
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            padding: 4px;
+            outline: none;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-5xl mx-auto space-y-8">
+<body class="min-h-screen p-4 sm:p-6 lg:p-8">
+    <div class="max-w-5xl mx-auto space-y-6">
         
-        <header class="text-center">
-            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Könyvtár Kezelő</h1>
-            <p class="text-sm text-slate-500 mt-1">Könyvek nyilvántartása és statisztikák</p>
-        </header>
+        <!-- Főablak: Új könyv hozzáadása -->
+        <div class="win98-window rounded-none p-1">
+            <div class="win98-titlebar flex justify-between items-center text-sm">
+                <span>📁 Új könyv hozzáadása.exe</span>
+                <span class="bg-[#c0c0c0] text-black px-2 border-t border-l border-white border-r border-b border-black text-xs cursor-pointer font-bold">X</span>
+            </div>
+            <div class="p-4 sm:p-6 space-y-4">
+                <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1">
+                        <label for="címInput" class="text-xs font-bold text-black">Cím:</label>
+                        <input type="text" name="cím" id="címInput" placeholder="Egri csillagok" class="win98-input text-sm text-black">
+                    </div>
 
-        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
-            <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                <span>📚</span> Új könyv hozzáadása
-            </h2>
-            <form class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="flex flex-col gap-1.5">
-                    <label for="címInput" class="text-sm font-semibold text-slate-700">Cím</label>
-                    <input 
-                        type="text" 
-                        name="cím" 
-                        id="címInput"
-                        placeholder="Egri csillagok"
-                        class="rounded-xl border border-slate-300 px-4 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                    >
-                </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="szerzőInput" class="text-xs font-bold text-black">Szerző:</label>
+                        <input type="text" name="szerző" id="szerzőInput" placeholder="Gárdonyi Géza" class="win98-input text-sm text-black">
+                    </div>
 
-                <div class="flex flex-col gap-1.5">
-                    <label for="szerzőInput" class="text-sm font-semibold text-slate-700">Szerző</label>
-                    <input 
-                        type="text" 
-                        name="szerző" 
-                        id="szerzőInput"
-                        placeholder="Gárdonyi Géza"
-                        class="rounded-xl border border-slate-300 px-4 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                    >
-                </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="kiadásÉveInput" class="text-xs font-bold text-black">Kiadás éve:</label>
+                        <input type="text" name="kiadásÉve" id="kiadásÉveInput" placeholder="1950" maxlength="4" class="win98-input text-sm text-black">
+                    </div>
 
-                <div class="flex flex-col gap-1.5">
-                    <label for="kiadásÉveInput" class="text-sm font-semibold text-slate-700">Kiadás éve</label>
-                    <input 
-                        type="text" 
-                        name="kiadásÉve" 
-                        id="kiadásÉveInput"
-                        placeholder="1950"
-                        maxlength="4"
-                        class="rounded-xl border border-slate-300 px-4 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                    >
-                </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="oldalszámInput" class="text-xs font-bold text-black">Oldalszám:</label>
+                        <input type="text" name="oldalszám" id="oldalszámInput" placeholder="300" class="win98-input text-sm text-black">
+                    </div>
+                    
+                    <div class="flex flex-col gap-1 sm:col-span-2">
+                        <label for="kategóriaInput" class="text-xs font-bold text-black">Kategória:</label>
+                        <input type="text" name="kategória" id="kategóriaInput" placeholder="Fantasy" class="win98-input text-sm text-black">
+                    </div>
 
-                <div class="flex flex-col gap-1.5">
-                    <label for="oldalszámInput" class="text-sm font-semibold text-slate-700">Oldalszám</label>
-                    <input 
-                        type="text" 
-                        name="oldalszám" 
-                        id="oldalszámInput"
-                        placeholder="300"
-                        class="rounded-xl border border-slate-300 px-4 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                    >
-                </div>
-                <div class="flex flex-col gap-1.5">
-                    <label for="kategóriaInput" class="text-sm font-semibold text-slate-700">Kategória</label>
-                    <input 
-                        type="text" 
-                        name="kategória" 
-                        id="kategóriaInput"
-                        placeholder="Fantasy"
-                        class="rounded-xl border border-slate-300 px-4 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                    >
-                </div>
-            </form>
+                    <div class="sm:col-span-2 pt-2">
+                        <button onclick="hozzáad()" id="hozzaad" type="button" class="win98-button text-xs text-black">
+                            [ Hozzáadás ]
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Második ablak: Statisztikák és Szűrés -->
+        <div class="win98-window rounded-none p-1">
+            <div class="win98-titlebar flex justify-between items-center text-sm">
+                <span>📊 Statisztikák és Kereső.exe</span>
+                <span class="bg-[#c0c0c0] text-black px-2 border-t border-l border-white border-r border-b border-black text-xs cursor-pointer font-bold">X</span>
+            </div>
+            <div class="p-4 sm:p-6 space-y-4">
                 
-
-                <div class="sm:col-span-2 mt-2">
-                    <button onclick="hozzáad()" id="hozzaad" type="button" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-xl shadow-sm transition active:scale-[0.99] cursor-pointer">
-                        Könyv hozzáadása
-                    </button>
+                <div class="flex flex-wrap gap-2">
+                    <button id="Legregebbi" onclick="legregebbiKönyv(könyvek)" type="button" class="win98-button text-xs text-black">🏛️ Legrégebbi</button>
+                    <button id="Legvastagabb" onclick="legvastagabbKönyv(könyvek)" type="button" class="win98-button text-xs text-black">📖 Legvastagabb</button>
+                    <button id="Szabad" onclick="SzabadKönyvek(könyvek)" type="button" class="win98-button text-xs text-black">✅ Szabad</button>
+                    <button id="atlagOldalszam" onclick="atlagOldalszam(könyvek)" type="button" class="win98-button text-xs text-black">📊 Átlag oldal</button>
+                    <button id="KolcsonozhetoKonyvek" onclick="kolcsonozhetoKonyvek(könyvek)" type="button" class="win98-button text-xs text-black">📚 Kölcsönözhető</button>
                 </div>
-            </form>
-        </section>
 
-        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 space-y-6">
-            <h2 class="text-xl font-bold text-slate-900">Statisztikák és Lekérdezések</h2>
-            
-            <div class="flex flex-wrap gap-3">
-                <button id="Legregebbi" onclick="legregebbiKönyv(könyvek)" type="button" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-4 rounded-xl text-sm transition border border-slate-200 cursor-pointer">
-                    🏛️ Legrégebbi könyv
-                </button>
-                <button id="Legvastagabb" onclick="legvastagabbKönyv(könyvek)" type="button" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-4 rounded-xl text-sm transition border border-slate-200 cursor-pointer">
-                    📖 Legvastagabb könyv
-                </button>
-                <button id="Szabad" onclick="SzabadKönyvek(könyvek)" type="button" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-4 rounded-xl text-sm transition border border-slate-200 cursor-pointer">
-                    ✅ Szabad könyvek
-                </button>
-                <button id="atlagOldalszam" onclick="atlagOldalszam(könyvek)" type="button" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-4 rounded-xl text-sm transition border border-slate-200 cursor-pointer">
-                    📊 Átlag oldalszám
-                </button>
+                <!-- Kategória szűrő rész -->
+                <div class="space-y-1 pt-2 border-t border-gray-400">
+                    <label for="Kategoriavalasztas" class="text-xs font-bold text-black block">Válassz kategóriát:</label>
+                    <select id="Kategoriavalasztas" onchange="KategoriaSzures()" class="win98-select w-full sm:w-72 text-sm text-black">
+                    </select>
 
-                <button id="KolcsonozhetoKonyvek" onclick="kolcsonozhetoKonyvek(könyvek)" type="button" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-4 rounded-xl text-sm transition border border-slate-200 cursor-pointer">
-                    📚 Kölcsönözhető könyvek
-                </button>
+                    <div id="KönyvekSzürve" class="mt-3 space-y-1"></div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <p id="LegregebbiKonyv" class="p-3 bg-white border-t border-l border-gray-600 border-r border-b border-white text-black empty:hidden"></p>
+                    <p id="LegvastagabbKonyv" class="p-3 bg-white border-t border-l border-gray-600 border-r border-b border-white text-black empty:hidden"></p>
+                    <p id="SzabadKonyvek" class="p-3 bg-white border-t border-l border-gray-600 border-r border-b border-white text-black empty:hidden"></p>
+                    <p id="KonyvAllapot" class="p-3 bg-white border-t border-l border-gray-600 border-r border-b border-white text-black empty:hidden"></p>
+                    <p id="AtlagOldalszam" class="p-3 bg-white border-t border-l border-gray-600 border-r border-b border-white text-black empty:hidden sm:col-span-2"></p>
+                    <p id="KolcsonozhetoKonyv" class="p-3 bg-white border-t border-l border-gray-600 border-r border-b border-white text-black empty:hidden sm:col-span-2"></p>
+                </div>
+                
+                <p id="KonyvekKiras" class="text-xs font-bold text-black"></p>
             </div>
+        </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                <p id="LegregebbiKonyv" class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 empty:hidden"></p>
-                <p id="LegvastagabbKonyv" class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 empty:hidden"></p>
-                <p id="SzabadKonyvek" class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 empty:hidden"></p>
-                <p id="KonyvAllapot" class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 empty:hidden"></p>
-                <p id="AtlagOldalszam" class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 empty:hidden sm:col-span-2"></p>
-                <p id="KolcsonozhetoKonyv" class="p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-600 empty:hidden sm:col-span-2"></p>
+        <!-- Harmadik ablak: Könyvlista Táblázat -->
+        <div class="win98-window rounded-none p-1">
+            <div class="win98-titlebar flex justify-between items-center text-sm">
+                <span>📋 Adatbázis - Könyvlista.dat</span>
+                <span class="bg-[#c0c0c0] text-black px-2 border-t border-l border-white border-r border-b border-black text-xs cursor-pointer font-bold">X</span>
             </div>
-
-            
-            
-            <p id="KonyvekKiras" class="text-sm font-semibold text-slate-700"></p>
-        </section>
-
-        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <div class="p-6 sm:p-8 border-b border-slate-200">
-                <h2 class="text-xl font-bold text-slate-900">Könyvlista</h2>
-            </div>
-            <div class="overflow-x-auto">
-                <table id="KonyvekTabla" class="w-full text-left border-collapse">
+            <div class="p-4 overflow-x-auto bg-white border-t border-l border-gray-600 border-r border-b border-white m-2">
+                <table id="KonyvekTabla" class="w-full text-left border-collapse text-xs">
                     <thead>
-                        <tr class="bg-slate-50 text-slate-600 uppercase text-xs tracking-wider border-b border-slate-200">
-                            <th class="px-6 py-4 font-semibold">Cím</th>
-                            <th class="px-6 py-4 font-semibold">Szerző</th>
-                            <th class="px-6 py-4 font-semibold">Kategória</th>  
-                            <th class="px-6 py-4 font-semibold">Oldalszám</th>
-                            <th class="px-6 py-4 font-semibold">Kiadás éve</th>
-                            <th class="px-6 py-4 font-semibold">Állapot</th>
-                            <th class="px-6 py-4 font-semibold">Művelet</th>
+                        <tr class="bg-[#c0c0c0] text-black border-b-2 border-gray-600">
+                            <th class="p-2 border-r border-gray-400">Cím</th>
+                            <th class="p-2 border-r border-gray-400">Szerző</th>
+                            <th class="p-2 border-r border-gray-400">Kategória</th>  
+                            <th class="p-2 border-r border-gray-400">Oldalszám</th>
+                            <th class="p-2 border-r border-gray-400">Kiadás éve</th>
+                            <th class="p-2 border-r border-gray-400">Állapot</th>
+                            <th class="p-2">Művelet</th>
                         </tr>
                     </thead>
-                    <tbody id="KonyvekTablaBody" class="divide-y divide-slate-200 text-sm text-slate-700">
+                    <tbody id="KonyvekTablaBody" class="divide-y divide-gray-200 text-black">
                     </tbody>
                 </table>
             </div>
-        </section>
+        </div>
 
     </div>
 

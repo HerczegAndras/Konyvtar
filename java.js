@@ -3,8 +3,14 @@ function Könyv(Cím, Szerző,Kategória, KiadásÉve, Oldalszám,Kölcsönözve
     this.Szerző = Szerző;
     this.Kategória = Kategória;
     this.KiadásÉve = KiadásÉve;
-    this.Oldalszám = Oldalszám;
+    this.Oldalszám =Number(Oldalszám) ;
     this.Kölcsönözve = Kölcsönözve;
+    this.kolcsonoz=()=>{
+        this.Kölcsönözve=true
+    }
+    this.visszahoz=()=>{
+        this.Kölcsönözve=false
+    }
 }
 let könyv1 = new Könyv("A Gyűrűk Ura", "J.R.R. Tolkien", "Fantasy", 1954, 1216, false);
 let könyv2 = new Könyv("1984", "George Orwell", "Dystopia", 1949, 328, false);
@@ -22,6 +28,7 @@ function hozzáad() {
     let újKönyv = new Könyv(cím, szerző, kategória, kiadásÉve, oldalszám, false);
     könyvek.push(újKönyv);
     tablazatBetoltes();
+    feltoltLegordulot();
 };
 
 function kiratas() {
@@ -73,8 +80,9 @@ function SzabadKönyvek(könyvek) {
 
 function atlagOldalszam(könyvek) {
     let összesOldalszám = könyvek.reduce((össz, könyv) => össz + könyv.Oldalszám, 0);
+    
     let átlag = összesOldalszám / könyvek.length;
-    document.getElementById("AtlagOldalszam").innerHTML = "Átlag oldalszám: " + átlag.toFixed(0);
+    document.getElementById("AtlagOldalszam").innerHTML = "Átlag oldalszám: " + átlag;
 }
 
 function tablazatBetoltes() {
@@ -111,7 +119,12 @@ function tablazatBetoltes() {
         modositButton.textContent = "Módosítás";
         
         modositButton.addEventListener("click", () => {
-            modosit(index); 
+            if (könyv.Kölcsönözve){
+                könyv.visszahoz()
+            }
+            else{
+                könyv.kolcsonoz()
+            }
             tablazatBetoltes(); 
         });
 
@@ -136,16 +149,51 @@ function törles(index) {
     könyvek.splice(index, 1); 
     tablazatBetoltes();        
 }
-function modosit(index) {
-    könyvek[index].Kölcsönözve = !könyvek[index].Kölcsönözve;
-}
+
 
 function kolcsonozhetoKonyvek(könyvek) {
+   
     let kolcsonozheto = könyvek.filter(könyv => !könyv.Kölcsönözve);
     let kolcsonozhetoListaja = kolcsonozheto.map(könyv => könyv.Cím).join(", ");
     document.getElementById("KolcsonozhetoKonyv").innerHTML = "Kölcsönözhető könyvek: " + kolcsonozhetoListaja;
 }
+function feltoltLegordulot() {
+        let valasztott = document.getElementById("Kategoriavalasztas");
+        valasztott.innerHTML = '<option value="all">Összes kategória</option>';
+        
+        let egyediKategoriak = [...new Set(könyvek.map(könyv => könyv.Kategória))];
+        
+        egyediKategoriak.forEach(kat => {
+            let opcio = document.createElement("option");
+            opcio.value = kat;      
+            opcio.textContent = kat;
+            valasztott.appendChild(opcio);
+        });
+    }
+
+function KategoriaSzures(){
+    let kivalasztott=document.getElementById("Kategoriavalasztas").value
+    let kiirat=document.getElementById("KönyvekSzürve")
+    kiirat.innerHTML="";
+
+    könyvek.forEach(konyv => {
+    if (konyv.Kategória === kivalasztott) {
+      
+        kiirat.innerHTML += `<p><strong>${konyv.Cím}</strong> - ${konyv.Szerző} (${konyv.Kategória})</p>`;
+    }
+});
+
+    
+
+    
+   
+
+}
+     
+ 
+
 
 document.addEventListener("DOMContentLoaded", () => {
     tablazatBetoltes(); 
+    feltoltLegordulot();
 });
