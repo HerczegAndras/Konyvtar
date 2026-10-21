@@ -115,17 +115,26 @@ function tablazatBetoltes() {
        
         const modositButton = document.createElement("button");
         modositButton.type = "button";
-        modositButton.className = "rounded-lg bg-blue-600 px-3 py-1 font-medium text-white transition hover:bg-blue-700 mr-3 mb-1";
-        modositButton.textContent = "Módosítás";
+        
+        
+        if (könyv.Kölcsönözve) {
+            modositButton.textContent = "Visszahozás";
+           
+            modositButton.className = "rounded-lg bg-amber-600 px-3 py-1 font-medium text-white transition hover:bg-amber-700 mr-3 mb-1";
+        } else {
+            modositButton.textContent = "Kölcsönzés";
+          
+            modositButton.className = "rounded-lg bg-green-600 px-3 py-1 font-medium text-white transition hover:bg-green-700 mr-3 mb-1";
+        }
         
         modositButton.addEventListener("click", () => {
-            if (könyv.Kölcsönözve){
-                könyv.visszahoz()
-            }
-            else{
-                könyv.kolcsonoz()
+            if (könyv.Kölcsönözve) {
+                könyv.visszahoz();
+            } else {
+                könyv.kolcsonoz();
             }
             tablazatBetoltes(); 
+            
         });
 
 
@@ -151,12 +160,7 @@ function törles(index) {
 }
 
 
-function kolcsonozhetoKonyvek(könyvek) {
-   
-    let kolcsonozheto = könyvek.filter(könyv => !könyv.Kölcsönözve);
-    let kolcsonozhetoListaja = kolcsonozheto.map(könyv => könyv.Cím).join(", ");
-    document.getElementById("KolcsonozhetoKonyv").innerHTML = "Kölcsönözhető könyvek: " + kolcsonozhetoListaja;
-}
+
 function feltoltLegordulot() {
         let valasztott = document.getElementById("Kategoriavalasztas");
         valasztott.innerHTML = '<option value="all">Összes kategória</option>';
